@@ -2,28 +2,18 @@ package runner
 
 import (
 	"github.com/kubeshop/testkube/pkg/api/v1/testkube"
-	"github.com/kubeshop/testkube/pkg/executor/content"
 	"github.com/kubeshop/testkube/pkg/executor/output"
 )
 
 func NewRunner() *ExampleRunner {
-	return &ExampleRunner{
-		Fetcher: content.NewFetcher(),
-	}
+	return &ExampleRunner{}
 }
 
 // ExampleRunner for template - change me to some valid runner
 type ExampleRunner struct {
-	Fetcher content.ContentFetcher
 }
 
 func (r *ExampleRunner) Run(execution testkube.Execution) (result testkube.ExecutionResult, err error) {
-	path, err := r.Fetcher.Fetch(execution.Content)
-	if err != nil {
-		return result, err
-	}
-
-	output.PrintEvent("created content path", path)
 
 	if execution.Content.IsFile() {
 		output.PrintEvent("using file", execution)
@@ -44,7 +34,7 @@ func (r *ExampleRunner) Run(execution testkube.Execution) (result testkube.Execu
 
 	// TODO return ExecutionResult
 	return testkube.ExecutionResult{
-		Status: testkube.StatusPtr(testkube.SUCCESS_ExecutionStatus),
+		Status: testkube.StatusPtr(testkube.PASSED_ExecutionStatus),
 		Output: "exmaple test output",
 	}, nil
 }
