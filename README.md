@@ -13,14 +13,14 @@ kubectl apply -f examples/zap-executor.yaml
 
 Issue the following commands to create and start a ZAP test for a given YAML configuration file:
 ```bash
-kubectl testkube test create --filename examples/zap-api.yaml --type "zap/api" --name api-test
-kubectl testkube test run --watch api-test
+kubectl testkube create test --filename examples/zap-api.yaml --type "zap/api" --name api-test
+kubectl testkube run run --watch api-test
 
-kubectl testkube test create --filename examples/zap-baseline.yaml --type "zap/baseline" --name baseline-test
-kubectl testkube test run --watch baseline-test
+kubectl testkube create test --filename examples/zap-baseline.yaml --type "zap/baseline" --name baseline-test
+kubectl testkube run test --watch baseline-test
 
-kubectl testkube test create --filename examples/zap-full.yaml --type "zap/full" --name full-test
-kubectl testkube test run --watch full-test
+kubectl testkube create test --filename examples/zap-full.yaml --type "zap/full" --name full-test
+kubectl testkube run test --watch full-test
 ```
 
 The required ZAP arguments and options need to be specified via a dedicated YAML configuration file, e.g.
