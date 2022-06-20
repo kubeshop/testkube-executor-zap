@@ -1,7 +1,6 @@
 package runner
 
 import (
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"testing"
@@ -158,12 +157,12 @@ func TestRun(t *testing.T) {
 }
 
 func writeTestContent(t *testing.T, dir string, configFile string) {
-	data, err := ioutil.ReadFile(configFile)
+	data, err := os.ReadFile(configFile)
 	if err != nil {
 		assert.FailNow(t, "Unable to read ZAP config file")
 	}
 
-	err = ioutil.WriteFile(filepath.Join(dir, "test-content"), data, 0644)
+	err = os.WriteFile(filepath.Join(dir, "test-content"), data, 0644)
 	if err != nil {
 		assert.FailNow(t, "Unable to write ZAP test-content file")
 	}
