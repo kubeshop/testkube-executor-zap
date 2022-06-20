@@ -2,7 +2,7 @@ package runner
 
 import (
 	"fmt"
-	"io/ioutil"
+	"os"
 	"strings"
 
 	"github.com/creasty/defaults"
@@ -105,7 +105,7 @@ type Options struct {
 }
 
 func (a *Options) UnmarshalYAML(yamlFile string) (err error) {
-	bytes, err := ioutil.ReadFile(yamlFile)
+	bytes, err := os.ReadFile(yamlFile)
 	if err != nil {
 		return err
 	}
