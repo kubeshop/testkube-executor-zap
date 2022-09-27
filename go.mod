@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/creasty/defaults v1.6.0
-	github.com/kubeshop/testkube v1.5.35
+	github.com/kubeshop/testkube v1.5.38
 	github.com/stretchr/testify v1.8.0
 	gopkg.in/yaml.v3 v3.0.1
 )
@@ -38,7 +38,7 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect
 	go.mongodb.org/mongo-driver v1.10.2 // indirect
-	golang.org/x/net v0.0.0-20220923203811-8be639271d50 // indirect
+	golang.org/x/net v0.0.0-20220926192436-02166a98028e // indirect
 	golang.org/x/oauth2 v0.0.0-20220909003341-f21342109be1 // indirect
 	golang.org/x/sys v0.0.0-20220926163933-8cfa568d3c25 // indirect
 	golang.org/x/term v0.0.0-20220919170432-7a66f970e087 // indirect
