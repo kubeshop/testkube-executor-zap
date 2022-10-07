@@ -79,7 +79,7 @@ func (r *ZapRunner) Run(execution testkube.Execution) (result testkube.Execution
 	os.Symlink(directory, filepath.Join(r.params.Zaphome, "wrk"))
 
 	output.PrintEvent("Running", r.params.Zaphome, scriptName, args)
-	output, err := executor.Run(r.params.Zaphome, scriptName, args...)
+	output, err := executor.Run(r.params.Zaphome, scriptName, nil, args...)
 
 	if err == nil {
 		result.Status = testkube.ExecutionStatusPassed
