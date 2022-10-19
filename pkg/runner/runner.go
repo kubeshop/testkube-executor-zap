@@ -9,7 +9,6 @@ import (
 
 	"github.com/kubeshop/testkube/pkg/api/v1/testkube"
 	"github.com/kubeshop/testkube/pkg/executor"
-	"github.com/kubeshop/testkube/pkg/executor/content"
 	"github.com/kubeshop/testkube/pkg/executor/output"
 )
 
@@ -49,12 +48,6 @@ func (r *ZapRunner) Run(execution testkube.Execution) (result testkube.Execution
 		// assume the ZAP config YAML has been passed as test argument
 		directory = filepath.Join(r.params.Datadir, "repo")
 		zapConfig = filepath.Join(directory, execution.Args[len(execution.Args)-1])
-	}
-
-	// add configuration files
-	err = content.PlaceFiles(execution.CopyFiles)
-	if err != nil {
-		return result.Err(fmt.Errorf("could not place config files: %w", err)), nil
 	}
 
 	options := Options{}
