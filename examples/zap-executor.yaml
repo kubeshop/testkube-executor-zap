@@ -7,13 +7,8 @@ spec:
   executor_type: job
   image: kubeshop/testkube-zap-executor:latest
   types:
-  - zap/api
-  - zap/baseline
-  - zap/full
-  #contentTypes:
-  # - "string"
-  # - file-uri
-  # - git-file
-  # - git-dir
+    - zap/api
+    - zap/baseline
+    - zap/full
   features:
     - artifacts
