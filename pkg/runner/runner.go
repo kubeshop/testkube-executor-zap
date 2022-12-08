@@ -10,6 +10,7 @@ import (
 	"github.com/kubeshop/testkube/pkg/api/v1/testkube"
 	"github.com/kubeshop/testkube/pkg/executor"
 	"github.com/kubeshop/testkube/pkg/executor/output"
+	"github.com/kubeshop/testkube/pkg/executor/secret"
 )
 
 type Params struct {
@@ -62,6 +63,13 @@ func (r *ZapRunner) Run(execution testkube.Execution) (result testkube.Execution
 	scriptName := zapScript(scanType)
 	args := zapArgs(scanType, options, reportFile)
 
+	envManager := secret.NewEnvManagerWithVars(execution.Variables)
+	envManager.GetVars(execution.Variables)
+	// simply set the ENVs to use during Maven execution
+	for _, env := range execution.Variables {
+		os.Setenv(env.Name, env.Value)
+	}
+
 	// convert executor env variables to runner env variables
 	for key, value := range execution.Envs {
 		os.Setenv(key, value)
@@ -72,7 +80,8 @@ func (r *ZapRunner) Run(execution testkube.Execution) (result testkube.Execution
 	os.Symlink(directory, filepath.Join(r.params.Zaphome, "wrk"))
 
 	output.PrintEvent("Running", r.params.Zaphome, scriptName, args)
-	output, err := executor.Run(r.params.Zaphome, scriptName, nil, args...)
+	output, err := executor.Run(r.params.Zaphome, scriptName, envManager, args...)
+	output = envManager.Obfuscate(output)
 
 	if err == nil {
 		result.Status = testkube.ExecutionStatusPassed
