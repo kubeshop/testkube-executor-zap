@@ -7,8 +7,7 @@ ENV GOOS=linux
 
 RUN cd cmd/agent;go build -o /runner -mod mod -a .
 
-FROM alpine
-RUN apk --no-cache add ca-certificates
-WORKDIR /root/
+FROM owasp/zap2docker-stable:2.12.0
+ENV ZAP_HOME /zap
 COPY --from=0 /runner /bin/runner
 ENTRYPOINT ["/bin/runner"]
