@@ -10,6 +10,7 @@ import (
 	"github.com/kubeshop/testkube/pkg/api/v1/testkube"
 	"github.com/kubeshop/testkube/pkg/executor"
 	"github.com/kubeshop/testkube/pkg/executor/output"
+	"github.com/kubeshop/testkube/pkg/executor/runner"
 	"github.com/kubeshop/testkube/pkg/executor/secret"
 )
 
@@ -65,7 +66,7 @@ func (r *ZapRunner) Run(execution testkube.Execution) (result testkube.Execution
 
 	envManager := secret.NewEnvManagerWithVars(execution.Variables)
 	envManager.GetVars(execution.Variables)
-	// simply set the ENVs to use during Maven execution
+	// simply set the ENVs to use during execution
 	for _, env := range execution.Variables {
 		os.Setenv(env.Name, env.Value)
 	}
@@ -127,6 +128,11 @@ func (r *ZapRunner) Run(execution testkube.Execution) (result testkube.Execution
 	// TODO maybe upload the report file as artifact
 
 	return result, err
+}
+
+// GetType returns runner type
+func (r *ZapRunner) GetType() runner.Type {
+	return runner.TypeMain
 }
 
 const API = "api"
