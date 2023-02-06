@@ -55,7 +55,7 @@ func (r *ZapRunner) Run(execution testkube.Execution) (result testkube.Execution
 	options := Options{}
 	err = options.UnmarshalYAML(zapConfig)
 	if err != nil {
-		return result.WithErrors(err), nil
+		return *result.WithErrors(err), nil
 	}
 
 	// determine the actual ZAP script and args to run
